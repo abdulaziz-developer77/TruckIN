@@ -14,6 +14,9 @@ struct CustomTextFieldView: View {
     let iconName: String
     @Binding var text: String
 
+    
+    
+    
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             TextField(placeholder, text: $text, axis: .vertical)
