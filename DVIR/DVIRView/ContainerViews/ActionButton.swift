@@ -11,20 +11,22 @@ struct ActionButton: View {
     var title: String
     var icon: String
     var color: Color
+    var width: CGFloat
+    var height: CGFloat
+    
+    
     
     var body: some View {
         Button(action: {
             
         }) {
             HStack(spacing: 8) {
+                Image(systemName: icon)
                 Text(title)
-                        .fontWeight(.semibold)
-                Image(icon)
-                    .font(.system(size: 16))
+                    .fontWeight(.semibold)
             }
-            .frame(width: 155.5, height: 44)
-            .padding(.init(top: 8, leading: 8, bottom: 8, trailing: 8))
-            .background(color.opacity(1))
+            .frame(width: width, height: height)
+            .background(color)
             .foregroundColor(.white)
             .cornerRadius(12)
         }

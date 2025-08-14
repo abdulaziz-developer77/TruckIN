@@ -7,41 +7,60 @@
 import SwiftUI
 
 struct TruckImageSection: View {
+    var size: CGSize
+    
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) { //checked
+        let deviceType = LayoutDeviceType.current(size)
+        let (imageHeight, spacing, cornerRadius) = imageLayout(for: deviceType)
+        
+        VStack(alignment: .leading, spacing: 8) {
             Text("Truck Image")
                 .font(.system(size: 14, weight: .semibold))
-
-            HStack(spacing: 8) { //checed
-              
-                 Image("truck.image")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                      
-                        .clipped()
-                        .cornerRadius(10)
-                    
-                    Image("truck.image")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                       
-                        .clipped()
-                        .cornerRadius(10)
-                    
-                    Image("truck.image")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        
-                        .clipped()
-                        .cornerRadius(10)
+            
+            HStack(spacing: spacing) {
+                
+                Image("truck.image")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipped()
+                    .frame(height: imageHeight)
+                    .cornerRadius(cornerRadius)
+                
+                Image("truck.image")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipped()
+                    .frame(height: imageHeight)
+                    .cornerRadius(cornerRadius)
+                
+                Image("truck.image")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipped()
+                    .frame(height: imageHeight)
+                    .cornerRadius(cornerRadius)
             }
+            .frame(maxWidth: .infinity, alignment: .center)
         }
-        .padding(8)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding()
         .background(Color.white)
+        .cornerRadius(12)
         .overlay(
             RoundedRectangle(cornerRadius: 12)
                 .stroke(Color.gray.opacity(0.4), lineWidth: 1)
         )
+        .frame(maxWidth: .infinity, alignment: .center)
+    }
+
+    func imageLayout(for type: LayoutDeviceType) -> (CGFloat, CGFloat, CGFloat) {
+        switch type {
+        case .iPhone:
+            return(72, 8, 10)
+        case .iPadPortrait:
+            return(128, 12, 10)
+        case .iPadLandscape:
+            return(118, 12, 10)
+        }
     }
 }
+

@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct InfoSection: View {
+    let size: CGSize
+    
     var body: some View {
+        let deviceType = LayoutDeviceType.current(size)
+
         VStack(alignment: .leading, spacing: 12) {
             InfoRow(label: "Truck ID:", value: "10")
             InfoRow(label: "Date:", value: "Jul 09 TUESDAY")
@@ -21,11 +25,10 @@ struct InfoSection: View {
         .padding(.horizontal, 12)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color.white)
-        .cornerRadius(10)
+        .cornerRadius(deviceType == .iPhone ? 10 : 12)
         .overlay(
-            RoundedRectangle(cornerRadius: 12)
+            RoundedRectangle(cornerRadius: deviceType == .iPhone ? 10 : 12)
                 .stroke(Color.gray.opacity(0.4), lineWidth: 1)
         )
-        
     }
 }

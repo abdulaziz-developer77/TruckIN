@@ -5,48 +5,82 @@
 //  Created by Abdulaziz Boyqoziyev  on 7/30/25.
 //
 //
-
 import SwiftUI
 
 struct DateTabBarView: View {
     @Binding var selectedIndex: Int
     var dates: [String]
     var weekDays: [String]
-    
+
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.verticalSizeClass) var verticalSizeClass
+
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 10) {
-                ForEach(dates.indices, id: \.self) { i in
-                    VStack(spacing: 2)  {
-                        // hop buyerda hafta kunlari
-                        Text(dates[i])
-                            .font(.system(size: 14, weight: .bold))
-                            .foregroundColor(selectedIndex == i ? Color.white : Color(red: 53/255, green: 53/255, blue: 53/255, opacity: 1))
-                        
-                        // sanalar
-                        Text(weekDays[i])
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(selectedIndex == i ? Color.white : Color(red: 125/255, green: 138/255, blue: 155/255, opacity: 1))
-                    }
-                    .frame(width: 80, height: 60)
-                    .background(
-                        ZStack {
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.white)
-                            
-                            if selectedIndex == i {
-                                RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color.blue)
-                                    .padding(3)
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(dates.indices, id: \.self) { i in
+                        let isSelected = selectedIndex == i
+
+                        VStack(spacing: 4) {
+                            Text(dates[i])
+                                .font(.system(size: 14, weight: .bold))
+                                .foregroundColor(isSelected ? .white : .black90)
+
+                            Text(weekDays[i])
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundColor(isSelected ? .white : .gray100)
+                        }
+                        .frame(width: itemWidth, height: 80)
+                        .background(
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.white)
+
+                                if isSelected {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color.primary100)
+                                        .padding(3)
+                                }
+                            }
+                        )
+                        .contentShape(Rectangle()) 
+                        .onTapGesture {
+                            withAnimation {
+                                selectedIndex = i
+                                proxy.scrollTo(i, anchor: .center)
                             }
                         }
-                    )
-                    .onTapGesture {
-                        selectedIndex = i
+                        .id(i)
                     }
                 }
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
+        }
+    }
+
+    private var itemWidth: CGFloat {
+        let screen = UIScreen.main.bounds.size
+        let isLandscape = screen.width > screen.height
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+
+        if isPad {
+            return isLandscape ? 146.5 : 87.55
+        } else {
+            return 80
+        }
+    }
+    
+    private var itemSpacing: CGFloat {
+        let screen = UIScreen.main.bounds.size
+        let isLandscape = screen.width > screen.height
+        let isPad = UIDevice.current.userInterfaceIdiom == .pad
+        
+        if  isPad {
+            return isLandscape ? 12 : 10
+        } else {
+            return 8
         }
     }
 }
+
