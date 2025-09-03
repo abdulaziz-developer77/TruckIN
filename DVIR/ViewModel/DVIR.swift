@@ -13,7 +13,7 @@ struct DVIR: Identifiable {
     let date: String
     let location: String
     let odometer: Double
-    let truckImages: [String] // image names or URLs
+    let truckImages: [String] 
     let trailerImages: [String]
     let truckDefects: String
     let trailerDefects: String

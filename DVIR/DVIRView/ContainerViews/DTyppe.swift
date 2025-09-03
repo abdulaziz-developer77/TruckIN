@@ -23,7 +23,4 @@ enum LayoutDeviceType {
         }
     }
 }
-/*
- Ipad, Iphone, ipadLandspace
- */
 

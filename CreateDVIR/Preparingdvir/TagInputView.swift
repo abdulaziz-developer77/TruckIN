@@ -25,7 +25,6 @@ struct TagInputView: View {
             HStack(spacing: 8) {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 8) {
-                        // tags
                         ForEach(tags, id: \.self) { tag in
                             HStack(spacing: 6) {
                                 Text(tag)
@@ -50,7 +49,7 @@ struct TagInputView: View {
                             .padding(.horizontal, 12)
                             .padding(.vertical, 8)
                             .font(.subheadline)
-//                            .background(RoundedRectangle(cornerRadius: 12).fill( Color.gray.opacity(0.3)))
+
                             .frame(minWidth: 80)
                     }
                     .padding(.vertical, 4)

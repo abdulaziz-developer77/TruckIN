@@ -12,10 +12,6 @@ struct CustomTextFieldView: View {
     let placeholder: String
     let iconName: String
     @Binding var text: String
-
-    
-    
-    
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             TextField(placeholder, text: $text, axis: .vertical)
@@ -42,7 +38,6 @@ struct CustomTextFieldView: View {
 struct TextFieldTestView: View {
     @State private var textFields: [String] = Array(repeating: "", count: 10)
 
-    // Har bir icon uchun turli systemName ishlatamiz
     let icons = [
         "pencil", "paperplane", "person", "envelope", "phone",
         "lock", "calendar", "house", "book", "star"

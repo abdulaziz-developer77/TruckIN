@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "IncorrectIconIphone.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
